@@ -31,3 +31,24 @@ class Student{
     public List<Student> students = new ArrayList<>();
     public Student(){}
 }
+/*
+A class has many children and there is a widespread flu infection.
+Some of them are infected and some are not.
+A child can infect many other children.
+A child who has infected other children knows who they have infected.
+The children who got infected do not know who they were infected by.
+Find patient zero.
+
+public class PatientZero {
+    public String findPatientZero(int studentCount, Student[] students){
+      // write you excellent code here
+    }
+}
+class Student{
+    public String name;
+    public List<Student> infectedStudents = new ArrayList<>();
+    public Student(){}
+}
+
+*
+* */
