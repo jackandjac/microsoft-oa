@@ -61,14 +61,16 @@ public class MovieRecommendations {
             {"Dennis", "Topsy-Turvy", "4"},
             {"Alice", "Lost In Translation", "1"}
     };
-    public static void main(String[] args){
-           MovieRecommendations recommendations = new MovieRecommendations();
-           List<String> result = recommendations.recommend("Charlie", ratings );
-           for(String item: result){
-               System.out.println(item);
-           }
+
+    public static void main(String[] args) {
+        MovieRecommendations recommendations = new MovieRecommendations();
+        List<String> result = recommendations.recommend("Charlie", ratings);
+        for (String item : result) {
+            System.out.println(item);
+        }
     }
-    public List<String> recommend(String name, String[][] ratings){
+
+    public List<String> recommend(String name, String[][] ratings) {
         Map<String, Map<String, List<String>>> ratingIdx = new HashMap<>();
         Map<String, Map<String, List<String>>> invertIdx = new HashMap<>();
 
@@ -82,24 +84,24 @@ public class MovieRecommendations {
         }
         Set<String> watched = new HashSet<>();
         Set<String> popular = new HashSet<>();
-        for(String key: ratingIdx.get(name).keySet()){
+        for (String key : ratingIdx.get(name).keySet()) {
             watched.addAll(ratingIdx.get(name).get(key));
-            if(key.equals("5")  || key.equals("4")) popular.addAll(ratingIdx.get(name).get(key));
+            if (key.equals("5") || key.equals("4")) popular.addAll(ratingIdx.get(name).get(key));
         }
         Set<String> ids = new HashSet<>();
-        for(String movie: popular){
-            if(invertIdx.get(movie).containsKey("5"))  ids.addAll(invertIdx.get(movie).get("5"));
-            if(invertIdx.get(movie).containsKey("4"))  ids.addAll(invertIdx.get(movie).get("4"));
+        for (String movie : popular) {
+            if (invertIdx.get(movie).containsKey("5")) ids.addAll(invertIdx.get(movie).get("5"));
+            if (invertIdx.get(movie).containsKey("4")) ids.addAll(invertIdx.get(movie).get("4"));
 
         }
 
         List<String> result = new ArrayList<>();
-        for(String id: ids){
+        for (String id : ids) {
             Set<String> movies = new HashSet<>();
-            if(ratingIdx.get(id).containsKey("4")) movies.addAll(ratingIdx.get(id).get("4"));
-            if(ratingIdx.get(id).containsKey("5")) movies.addAll(ratingIdx.get(id).get("5"));
-            for(String movie: movies){
-                if(!watched.contains(movie)) result.add(movie);
+            if (ratingIdx.get(id).containsKey("4")) movies.addAll(ratingIdx.get(id).get("4"));
+            if (ratingIdx.get(id).containsKey("5")) movies.addAll(ratingIdx.get(id).get("5"));
+            for (String movie : movies) {
+                if (!watched.contains(movie)) result.add(movie);
             }
         }
         return result;
