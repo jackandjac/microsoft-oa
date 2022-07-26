@@ -13,8 +13,8 @@ public class FindTheCity {
 
         }
         int idx = -1;
-        for (int i = 0; i < graph.size(); i++) {
-            int temp = cheapest(i, graph, distanceThreshold);
+        for (int i = 0; i < n; i++) {
+            int temp = cheapest(n,i, graph, distanceThreshold);
             if (temp < res) {
                 res = temp;
                 idx = i;
@@ -26,8 +26,8 @@ public class FindTheCity {
         return idx;
     }
 
-    public int cheapest(int src, Map<Integer, List<int[]>> graph, int dist) {
-        int n = graph.size();
+    public int cheapest(int n, int src, Map<Integer, List<int[]>> graph, int dist) {
+
         int[] dp = new int[n];
         Arrays.fill(dp, Integer.MAX_VALUE);
         dp[src] = 0;
@@ -42,6 +42,8 @@ public class FindTheCity {
                         int weight = data[1];
                         temp[nxt] = Math.min(temp[nxt], dp[j] + weight);
                     }
+                }else{
+                    return 0;
                 }
             }
             dp = temp;
@@ -52,7 +54,7 @@ public class FindTheCity {
             if (i == src) continue;
             if (dp[i] <= dist) res++;
         }
-        return res == 0 ? Integer.MAX_VALUE : res;
+        return res;
     }
     public void test(){
         int n = 6;
