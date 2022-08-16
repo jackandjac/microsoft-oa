@@ -18,16 +18,14 @@ public class SudokuGenerator {
     public static void main(String args[]) {
         SudokuGenerator generator = new SudokuGenerator();
         int[][] matrix = generator.generateSudoku();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(matrix[i][j]);
-                if (j != 8) System.out.print(" ,");
-            }
-            System.out.println();
-        }
+        printTestOutput(matrix);
 
         System.out.println("###########################");
         int[][] rmatrix = generator.generateRandomSudoku();
+        printTestOutput(rmatrix);
+    }
+
+    private static void printTestOutput(int[][] rmatrix) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(rmatrix[i][j]);
